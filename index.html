@@ -611,7 +611,9 @@ function showCanvas(containerId, canvas) {
 
       const file = document.getElementById("compressFile").files[0];
       const targetKB = Number(document.getElementById("targetKB").value);
-
+showMessage(
+  Compressed successfully: ${Math.round(blob.size / 1024)} KB.
+);
       if (!targetKB || targetKB < 5) {
         throw new Error("Target size must be at least 5 KB.");
       }
