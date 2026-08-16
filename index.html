@@ -1,23 +1,35 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Free online image tools. Resize, compress, create passport photos, signatures and collages directly in your browser.">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+  <meta
+    name="description"
+    content="Free online image tools. Resize, compress, crop, convert, create passport photos, signatures and collages directly in your browser."
+  >
+  <meta
+    name="theme-color"
+    content="#2563eb"
+  >
   <title>Free Image Tools</title>
+
   <style>
     :root {
-      --primary: #3548a0;
-      --primary-dark: #26357c;
-      --background: #f5f7ff;
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --background: #f5f7fb;
       --surface: #ffffff;
       --text: #172033;
       --muted: #687086;
-      --border: #dce1f2;
+      --border: #dce1eb;
       --success: #168653;
       --danger: #c83d3d;
-      --shadow: 0 12px 35px rgba(38, 53, 124, 0.1);
-      --radius: 18px;
+      --shadow: 0 8px 25px rgba(23, 32, 51, 0.08);
+      --radius: 16px;
     }
 
     * {
@@ -30,9 +42,16 @@
 
     body {
       margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
+      min-height: 100vh;
       background: var(--background);
       color: var(--text);
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif;
       line-height: 1.5;
     }
 
@@ -44,21 +63,22 @@
 
     button {
       cursor: pointer;
+      touch-action: manipulation;
     }
 
-    .header {
-      background: linear-gradient(135deg, var(--primary), #5869c7);
-      color: white;
-      padding: 22px 20px;
+    .site-header {
       position: sticky;
       top: 0;
-      z-index: 20;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+      z-index: 100;
+      background: var(--primary);
+      color: white;
+      box-shadow: 0 3px 15px rgba(0, 0, 0, 0.12);
     }
 
     .header-inner {
-      max-width: 1180px;
-      margin: auto;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 18px 22px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -66,68 +86,77 @@
     }
 
     .brand {
-      font-size: 25px;
-      font-weight: 800;
-      letter-spacing: -0.5px;
+      color: white;
+      text-decoration: none;
     }
 
-    .tagline {
-      font-size: 13px;
-      opacity: 0.9;
+    .brand h1 {
+      margin: 0;
+      font-size: clamp(1.25rem, 3vw, 1.7rem);
+    }
+
+    .brand p {
+      margin: 3px 0 0;
+      opacity: 0.88;
+      font-size: 0.9rem;
+    }
+
+    .all-tools-button {
+      border: 0;
+      background: white;
+      color: var(--primary);
+      padding: 11px 18px;
+      border-radius: 10px;
+      font-weight: 700;
+      min-height: 44px;
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 34px 20px 70px;
     }
 
     .hero {
-      max-width: 1180px;
-      margin: 45px auto 25px;
-      padding: 0 20px;
       text-align: center;
+      margin-bottom: 30px;
     }
 
-    .hero h1 {
-      margin: 0 0 10px;
-      font-size: clamp(32px, 6vw, 52px);
-      line-height: 1.08;
+    .hero h2 {
+      margin: 0 0 8px;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      line-height: 1.15;
     }
 
     .hero p {
-      color: var(--muted);
       margin: 0 auto;
-      max-width: 680px;
-      font-size: 17px;
+      max-width: 720px;
+      color: var(--muted);
+      font-size: 1.05rem;
     }
 
-    .notice {
-      max-width: 850px;
-      margin: 25px auto;
-      padding: 14px 18px;
-      background: #eef9f3;
-      border: 1px solid #bce6ce;
-      color: #176b43;
+    .privacy {
+      margin: 24px auto 35px;
+      max-width: 900px;
+      padding: 15px 20px;
+      border: 1px solid #cfe7d8;
+      background: #f0faf3;
+      color: #25623c;
       border-radius: 12px;
-      font-size: 14px;
+      text-align: center;
     }
 
-    .section {
-      max-width: 1180px;
-      margin: 40px auto;
-      padding: 0 20px;
+    .tool-section h3 {
+      margin: 0 0 6px;
+      font-size: 1.6rem;
     }
 
-    .section-title {
-      margin-bottom: 18px;
-    }
-
-    .section-title h2 {
-      margin: 0;
-      font-size: 28px;
-    }
-
-    .section-title p {
-      margin: 5px 0 0;
+    .section-description {
+      margin: 0 0 20px;
       color: var(--muted);
     }
 
-    .tools-grid {
+    .tool-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 18px;
@@ -137,80 +166,92 @@
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 24px;
+      padding: 22px;
       box-shadow: var(--shadow);
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    .tool-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 16px 40px rgba(38, 53, 124, 0.15);
+      display: flex;
+      flex-direction: column;
+      min-height: 190px;
     }
 
     .tool-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 14px;
-      background: #edf0ff;
+      width: 50px;
+      height: 50px;
+      border-radius: 13px;
+      background: #e9f0ff;
       display: grid;
       place-items: center;
-      font-size: 24px;
-      margin-bottom: 15px;
+      font-size: 1.7rem;
+      margin-bottom: 14px;
     }
 
-    .tool-card h3 {
-      margin: 0 0 7px;
-      font-size: 20px;
+    .tool-card h4 {
+      margin: 0 0 6px;
+      font-size: 1.2rem;
     }
 
     .tool-card p {
       margin: 0 0 18px;
       color: var(--muted);
-      font-size: 14px;
     }
 
-    .primary-btn,
-    .secondary-btn,
-    .danger-btn {
+    .tool-card button {
+      margin-top: auto;
+    }
+
+    .primary-button,
+    .secondary-button,
+    .danger-button {
       border: 0;
-      border-radius: 11px;
-      padding: 12px 17px;
+      border-radius: 10px;
+      min-height: 46px;
+      padding: 10px 18px;
       font-weight: 700;
-      transition: 0.2s;
     }
 
-    .primary-btn {
+    .primary-button {
       background: var(--primary);
       color: white;
     }
 
-    .primary-btn:hover {
+    .primary-button:hover {
       background: var(--primary-dark);
     }
 
-    .secondary-btn {
-      background: #edf0ff;
-      color: var(--primary-dark);
+.secondary-button {
+      background: #edf1f7;
+      color: var(--text);
     }
 
-    .danger-btn {
-      background: #fff0f0;
+    .danger-button {
+      background: #fdecec;
       color: var(--danger);
     }
 
-.tool-panel {
+    .tool-panel {
       display: none;
-      max-width: 1000px;
-      margin: 25px auto;
-      padding: 25px;
-      background: white;
+      margin-top: 30px;
+      background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius);
+      padding: 24px;
       box-shadow: var(--shadow);
     }
 
     .tool-panel.active {
       display: block;
+      animation: panel-in 0.18s ease-out;
+    }
+
+    @keyframes panel-in {
+      from {
+        opacity: 0;
+        transform: translateY(5px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .panel-header {
@@ -221,81 +262,31 @@
       margin-bottom: 20px;
     }
 
-    .panel-header h2 {
+    .panel-header h3 {
       margin: 0;
-      font-size: 25px;
+      font-size: 1.5rem;
     }
 
-    .upload-box {
-      border: 2px dashed #aeb8df;
-      border-radius: 16px;
-      padding: 35px 20px;
-      text-align: center;
-      background: #fafbff;
-      transition: 0.2s;
+    .close-button {
+      width: 44px;
+      height: 44px;
+      border: 0;
+      border-radius: 50%;
+      background: #edf1f7;
+      font-size: 1.3rem;
+      color: var(--text);
     }
 
-    .upload-box.dragover {
-      border-color: var(--primary);
-      background: #f0f3ff;
-    }
-
-    .upload-box input {
-      display: none;
-    }
-
-    .upload-label {
-      display: inline-block;
-      background: var(--primary);
-      color: white;
-      border-radius: 11px;
-      padding: 13px 20px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .upload-text {
-      margin: 10px 0 0;
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .preview-area {
-      display: none;
-      margin-top: 22px;
-    }
-
-    .preview-area.active {
-      display: block;
-    }
-
-    .preview-image {
-      display: block;
-      max-width: 100%;
-      max-height: 450px;
-      margin: 0 auto;
-      border-radius: 10px;
-      object-fit: contain;
-      background:
-        linear-gradient(45deg, #eee 25%, transparent 25%),
-        linear-gradient(-45deg, #eee 25%, transparent 25%),
-        linear-gradient(45deg, transparent 75%, #eee 75%),
-        linear-gradient(-45deg, transparent 75%, #eee 75%);
-      background-size: 20px 20px;
-      background-position: 0 0, 0 10px, 10px -10px, -10px 0;
-    }
-
-    .controls {
+    .control-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 15px;
-      margin-top: 22px;
+      gap: 16px;
     }
 
     .field {
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 7px;
     }
 
     .field.full {
@@ -304,423 +295,664 @@
 
     .field label {
       font-weight: 700;
-      font-size: 14px;
+      font-size: 0.93rem;
     }
 
     .field input,
     .field select {
       width: 100%;
-      padding: 12px;
-      border: 1px solid #cbd2e8;
-      border-radius: 10px;
-      outline: none;
+      min-height: 46px;
+      padding: 9px 12px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
       background: white;
+      color: var(--text);
     }
 
-    .field input:focus,
-    .field select:focus {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(53, 72, 160, 0.1);
+    .file-input {
+      padding: 8px !important;
     }
 
-    .action-row {
+    .button-row {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
+      margin-top: 18px;
+    }
+
+    .preview-area {
       margin-top: 20px;
-    }
-
-    .result {
-      margin-top: 20px;
-      padding: 14px;
-      border-radius: 11px;
-      background: #f5f7ff;
-      color: var(--text);
-      display: none;
-    }
-
-    .result.active {
-      display: block;
-    }
-
-    .error {
-      background: #fff1f1;
-      color: var(--danger);
-      border: 1px solid #f0c1c1;
-    }
-
-    .success {
-      background: #effaf4;
-      color: var(--success);
-      border: 1px solid #bfe6ce;
-    }
-
-    .signature-wrap {
-      display: none;
-      margin-top: 20px;
-    }
-
-    .signature-wrap.active {
-      display: block;
-    }
-
-    #signatureCanvas {
-      width: 100%;
-      max-width: 700px;
-      height: 280px;
-      display: block;
-      margin: auto;
-      border: 2px solid #cbd2e8;
+      min-height: 160px;
+      border: 2px dashed var(--border);
       border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 15px;
+      background: #fafbfe;
+      overflow: hidden;
+    }
+
+    .preview-area img,
+    .preview-area canvas {
+      max-width: 100%;
+      max-height: 500px;
+      display: block;
+      object-fit: contain;
+    }
+
+    .empty-preview {
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .status {
+      margin-top: 15px;
+      padding: 12px 15px;
+      border-radius: 9px;
+      display: none;
+    }
+
+    .status.show {
+      display: block;
+    }
+
+    .status.success {
+      background: #eaf8ef;
+      color: #146c3f;
+    }
+
+    .status.error {
+      background: #fff0f0;
+      color: #9d2929;
+    }
+
+    .status.info {
+      background: #edf4ff;
+      color: #24559f;
+    }
+
+    .canvas-wrapper {
+      overflow: auto;
+      max-width: 100%;
+    }
+
+    .signature-pad {
+      width: 100%;
+      height: 260px;
+      border: 2px solid var(--border);
+      border-radius: 10px;
       background: white;
       touch-action: none;
+      display: block;
     }
 
     .collage-preview {
       display: grid;
       gap: 8px;
-      margin-top: 20px;
-      padding: 10px;
-      background: #eee;
-      border-radius: 10px;
+      width: 100%;
     }
 
     .collage-preview img {
       width: 100%;
-      height: 100%;
-      object-fit: cover;
-      min-height: 120px;
+      height: auto;
+      display: block;
+      border-radius: 4px;
     }
 
-    .status {
-      color: var(--muted);
-      font-size: 13px;
-      margin-top: 8px;
-    }
-
-    .footer {
-      margin-top: 70px;
-      padding: 35px 20px;
-      background: #182044;
-      color: white;
+    footer {
       text-align: center;
+      color: var(--muted);
+      padding: 30px 20px 45px;
     }
 
-    .footer p {
+    footer p {
       margin: 5px 0;
-      opacity: 0.8;
-      font-size: 13px;
     }
 
-.hidden {
-      display: none !important;
-    }
-
-    @media (max-width: 720px) {
+    @media (max-width: 700px) {
       .header-inner {
-        align-items: flex-start;
-        flex-direction: column;
+        padding: 14px 15px;
       }
 
-      .tools-grid,
-      .controls {
+      main {
+        padding: 25px 14px 55px;
+      }
+
+      .tool-grid,
+      .control-grid {
         grid-template-columns: 1fr;
       }
 
-      .field.full {
-        grid-column: auto;
-      }
-
-      .tool-card {
-        padding: 20px;
-      }
-
       .tool-panel {
-        margin-left: 12px;
-        margin-right: 12px;
         padding: 18px;
       }
 
-      .hero {
-        margin-top: 32px;
+      .hero h2 {
+        font-size: 2rem;
+      }
+
+      .button-row {
+        flex-direction: column;
+      }
+
+      .button-row button {
+        width: 100%;
       }
     }
   </style>
 </head>
+
 <body>
-  <header class="header">
+  <header class="site-header">
     <div class="header-inner">
-      <div>
-        <div class="brand">Free Image Tools</div>
-        <div class="tagline">Simple • Private • Free</div>
-      </div>
-      <button class="secondary-btn" onclick="scrollToTools()">All Tools</button>
+      <a class="brand" href="#">
+        <h1>Free Image Tools</h1>
+        <p>Simple · Private · Free</p>
+      </a>
+
+<button
+        class="all-tools-button"
+        type="button"
+        onclick="scrollToTools()"
+      >
+        All Tools
+      </button>
     </div>
   </header>
 
   <main>
     <section class="hero">
-      <h1>Free Online Image Tools</h1>
-      <p>Resize, compress, create passport photos, signatures and collages directly in your browser.</p>
-      <div class="notice">
-        🔒 Your images are processed locally in your browser. They are not uploaded to our server.
-      </div>
+      <h2>Free Online Image Tools</h2>
+      <p>
+        Resize, compress, crop, convert, create passport photos,
+        signatures and collages directly in your browser.
+      </p>
     </section>
 
-    <section class="section" id="tools">
-      <div class="section-title">
-        <h2>Image Tools</h2>
-        <p>Choose a free tool below.</p>
-      </div>
+    <div class="privacy">
+      🔒 Your images are processed locally in your browser.
+      They are not uploaded to a server.
+    </div>
 
-      <div class="tools-grid">
+    <section class="tool-section" id="tools">
+      <h3>Image Tools</h3>
+      <p class="section-description">
+        Choose a free tool below.
+      </p>
+
+      <div class="tool-grid">
         <article class="tool-card">
           <div class="tool-icon">🪪</div>
-          <h3>Passport Photo Maker</h3>
+          <h4>Passport Photo Maker</h4>
           <p>Create a 35 × 45 mm passport-size photo.</p>
-          <button class="primary-btn" onclick="openTool('passport')">Open Tool</button>
+          <button
+            class="primary-button"
+            type="button"
+            onclick="openTool('passport')"
+          >
+            Open Tool
+          </button>
         </article>
 
         <article class="tool-card">
           <div class="tool-icon">📉</div>
-          <h3>Reduce Image Size in KB</h3>
+          <h4>Reduce Image Size in KB</h4>
           <p>Compress an image to a target file size.</p>
-          <button class="primary-btn" onclick="openTool('compress')">Open Tool</button>
+          <button
+            class="primary-button"
+            type="button"
+            onclick="openTool('compress')"
+          >
+            Open Tool
+          </button>
         </article>
 
         <article class="tool-card">
           <div class="tool-icon">📐</div>
-          <h3>Resize Image Pixel</h3>
-          <p>Resize an image to exact pixel dimensions.</p>
-          <button class="primary-btn" onclick="openTool('pixel')">Open Tool</button>
+          <h4>Resize Image</h4>
+          <p>Change image width and height.</p>
+          <button
+            class="primary-button"
+            type="button"
+            onclick="openTool('resize')"
+          >
+            Open Tool
+          </button>
         </article>
 
         <article class="tool-card">
-          <div class="tool-icon">🖼️</div>
-          <h3>Photo Collage Maker</h3>
-          <p>Combine multiple photos into one collage.</p>
-          <button class="primary-btn" onclick="openTool('collage')">Open Tool</button>
+          <div class="tool-icon">🔄</div>
+          <h4>Convert Image</h4>
+          <p>Convert JPG, PNG and WebP images.</p>
+          <button
+            class="primary-button"
+            type="button"
+            onclick="openTool('convert')"
+          >
+            Open Tool
+          </button>
+        </article>
+
+        <article class="tool-card">
+          <div class="tool-icon">✂️</div>
+          <h4>Crop Image</h4>
+          <p>Crop an image to a custom aspect ratio.</p>
+          <button
+            class="primary-button"
+            type="button"
+            onclick="openTool('crop')"
+          >
+            Open Tool
+          </button>
+        </article>
+
+        <article class="tool-card">
+          <div class="tool-icon">↻</div>
+          <h4>Rotate & Flip</h4>
+          <p>Rotate or flip your image instantly.</p>
+          <button
+            class="primary-button"
+            type="button"
+            onclick="openTool('rotate')"
+          >
+            Open Tool
+          </button>
         </article>
 
         <article class="tool-card">
           <div class="tool-icon">✍️</div>
-          <h3>Generate Signature</h3>
-          <p>Draw a signature and download it as PNG.</p>
-          <button class="primary-btn" onclick="openTool('signature')">Open Tool</button>
+          <h4>Signature Maker</h4>
+          <p>Draw and download a transparent signature.</p>
+          <button
+            class="primary-button"
+            type="button"
+            onclick="openTool('signature')"
+          >
+            Open Tool
+          </button>
         </article>
 
         <article class="tool-card">
-          <div class="tool-icon">📈</div>
-          <h3>Increase Image Size in KB</h3>
-          <p>Generate a JPEG close to your requested file size.</p>
-          <button class="primary-btn" onclick="openTool('increase')">Open Tool</button>
-        </article>
-
-        <article class="tool-card">
-          <div class="tool-icon">🖊️</div>
-          <h3>Resize Signature</h3>
-          <p>Resize a signature image to exact dimensions.</p>
-          <button class="primary-btn" onclick="openTool('signature-resize')">Open Tool</button>
-        </article>
-
-        <article class="tool-card">
-          <div class="tool-icon">📏</div>
-          <h3>Resize Image in Centimeter</h3>
-          <p>Set exact physical dimensions in centimeters.</p>
-          <button class="primary-btn" onclick="openTool('cm')">Open Tool</button>
-        </article>
-
-        <article class="tool-card">
-          <div class="tool-icon">📸</div>
-          <h3>Resize Image 3.5 × 4.5 cm</h3>
-          <p>Create a standard 3.5 × 4.5 cm photo.</p>
-          <button class="primary-btn" onclick="openTool('standard')">Open Tool</button>
+          <div class="tool-icon">🖼️</div>
+          <h4>Photo Collage</h4>
+          <p>Combine multiple images into one collage.</p>
+          <button
+            class="primary-button"
+            type="button"
+            onclick="openTool('collage')"
+          >
+            Open Tool
+          </button>
         </article>
       </div>
     </section>
 
-<section class="section">
-      <div id="passport" class="tool-panel">
-        <div class="panel-header">
-          <h2>🪪 Passport Photo Maker</h2>
-          <button class="danger-btn" onclick="closeTool('passport')">Close</button>
+    <section
+      class="tool-panel"
+      id="panel-passport"
+    >
+      <div class="panel-header">
+        <h3>Passport Photo Maker</h3>
+        <button
+          class="close-button"
+          type="button"
+          onclick="closeTool('passport')"
+          aria-label="Close"
+        >
+          ×
+        </button>
+      </div>
+
+<div class="control-grid">
+        <div class="field full">
+          <label for="passport-file">Choose Photo</label>
+          <input
+            id="passport-file"
+            class="file-input"
+            type="file"
+            accept="image/*"
+          >
         </div>
-        <div class="upload-box" id="passportUploadBox">
-          <input id="passportInput" type="file" accept="image/*">
-          <label class="upload-label" for="passportInput">Choose Photo</label>
-          <div class="upload-text">Recommended output: 413 × 531 px at 300 DPI.</div>
+
+        <div class="field">
+          <label for="passport-width">
+            Width in pixels
+          </label>
+          <input
+            id="passport-width"
+            type="number"
+            min="100"
+            value="413"
+          >
         </div>
-        <div class="preview-area" id="passportPreviewArea">
-          <img class="preview-image" id="passportPreview" alt="Passport preview">
-          <div class="action-row">
-            <button class="primary-btn" onclick="createPassport()">Create Passport Photo</button>
-            <button class="secondary-btn" onclick="downloadCurrent('passport')">Download</button>
-          </div>
-          <div class="result" id="passportResult"></div>
+
+        <div class="field">
+          <label for="passport-height">
+            Height in pixels
+          </label>
+          <input
+            id="passport-height"
+            type="number"
+            min="100"
+            value="531"
+          >
         </div>
       </div>
 
-      <div id="compress" class="tool-panel">
-        <div class="panel-header">
-          <h2>📉 Reduce Image Size in KB</h2>
-          <button class="danger-btn" onclick="closeTool('compress')">Close</button>
-        </div>
-        <div class="upload-box">
-          <input id="compressInput" type="file" accept="image/*">
-          <label class="upload-label" for="compressInput">Choose Photo</label>
-          <div class="upload-text">JPG, PNG and WebP images supported.</div>
-        </div>
-        <div class="preview-area" id="compressPreviewArea">
-          <img class="preview-image" id="compressPreview" alt="Compression preview">
-          <div class="controls">
-            <div class="field">
-              <label for="compressTarget">Target size (KB)</label>
-              <input id="compressTarget" type="number" min="5" max="10000" value="100">
-            </div>
-            <div class="field">
-              <label for="compressFormat">Output format</label>
-              <select id="compressFormat">
-                <option value="image/jpeg">JPG</option>
-                <option value="image/webp">WebP</option>
-              </select>
-            </div>
-          </div>
-          <div class="action-row">
-            <button class="primary-btn" onclick="compressImage()">Compress Image</button>
-          </div>
-          <div class="result" id="compressResult"></div>
+      <div class="button-row">
+        <button
+          class="primary-button"
+          type="button"
+          onclick="createPassportPhoto()"
+        >
+          Create Passport Photo
+        </button>
+      </div>
+
+      <div class="preview-area" id="passport-preview">
+        <div class="empty-preview">
+          Choose an image to begin.
         </div>
       </div>
 
-      <div id="pixel" class="tool-panel">
-        <div class="panel-header">
-          <h2>📐 Resize Image Pixel</h2>
-          <button class="danger-btn" onclick="closeTool('pixel')">Close</button>
+      <div class="status" id="passport-status"></div>
+    </section>
+
+    <section
+      class="tool-panel"
+      id="panel-compress"
+    >
+      <div class="panel-header">
+        <h3>Reduce Image Size in KB</h3>
+        <button
+          class="close-button"
+          type="button"
+          onclick="closeTool('compress')"
+          aria-label="Close"
+        >
+          ×
+        </button>
+      </div>
+
+      <div class="control-grid">
+        <div class="field full">
+          <label for="compress-file">
+            Choose Photo
+          </label>
+          <input
+            id="compress-file"
+            class="file-input"
+            type="file"
+            accept="image/*"
+          >
         </div>
-        <div class="upload-box">
-          <input id="pixelInput" type="file" accept="image/*">
-          <label class="upload-label" for="pixelInput">Choose Photo</label>
-        </div>
-        <div class="preview-area" id="pixelPreviewArea">
-          <img class="preview-image" id="pixelPreview" alt="Pixel resize preview">
-          <div class="controls">
-            <div class="field">
-              <label for="pixelWidth">Width (px)</label>
-              <input id="pixelWidth" type="number" min="1" value="800">
-            </div>
-            <div class="field">
-              <label for="pixelHeight">Height (px)</label>
-              <input id="pixelHeight" type="number" min="1" value="600">
-            </div>
-            <div class="field full">
-              <label>
-                <input id="pixelLock" type="checkbox" checked>
-                Keep aspect ratio
-              </label>
-            </div>
-          </div>
-          <div class="action-row">
-            <button class="primary-btn" onclick="resizePixels()">Resize & Download</button>
-          </div>
-          <div class="result" id="pixelResult"></div>
+
+        <div class="field">
+          <label for="compress-size">
+            Target size (KB)
+          </label>
+          <input
+            id="compress-size"
+            type="number"
+            min="1"
+            value="100"
+          >
         </div>
       </div>
 
-<div id="collage" class="tool-panel">
-        <div class="panel-header">
-          <h2>🖼️ Photo Collage Maker</h2>
-          <button class="danger-btn" onclick="closeTool('collage')">Close</button>
-        </div>
-        <div class="upload-box">
-          <input id="collageInput" type="file" accept="image/*" multiple>
-          <label class="upload-label" for="collageInput">Choose Photos</label>
-          <div class="upload-text">Select up to 9 images.</div>
-        </div>
-        <div class="controls">
-          <div class="field">
-            <label for="collageColumns">Columns</label>
-            <input id="collageColumns" type="number" min="1" max="4" value="2">
-          </div>
-          <div class="field">
-            <label for="collageGap">Gap (px)</label>
-            <input id="collageGap" type="number" min="0" max="100" value="10">
-          </div>
-        </div>
-        <div class="collage-preview hidden" id="collagePreview"></div>
-        <div class="action-row">
-          <button class="primary-btn" onclick="createCollage()">Create & Download Collage</button>
-        </div>
-        <div class="result" id="collageResult"></div>
+      <div class="button-row">
+        <button
+          class="primary-button"
+          type="button"
+          onclick="compressImage()"
+        >
+          Compress Image
+        </button>
       </div>
 
-      <div id="signature" class="tool-panel">
-        <div class="panel-header">
-          <h2>✍️ Generate Signature</h2>
-          <button class="danger-btn" onclick="closeTool('signature')">Close</button>
-        </div>
-        <div class="signature-wrap active">
-          <canvas id="signatureCanvas" width="1000" height="400"></canvas>
-          <div class="action-row">
-            <button class="secondary-btn" onclick="clearSignature()">Clear</button>
-            <button class="primary-btn" onclick="downloadSignature()">Download PNG</button>
-          </div>
+      <div class="preview-area" id="compress-preview">
+        <div class="empty-preview">
+          Choose an image to begin.
         </div>
       </div>
 
-      <div id="increase" class="tool-panel">
-        <div class="panel-header">
-          <h2>📈 Increase Image Size in KB</h2>
-          <button class="danger-btn" onclick="closeTool('increase')">Close</button>
+      <div class="status" id="compress-status"></div>
+    </section>
+
+    <section
+      class="tool-panel"
+      id="panel-resize"
+    >
+      <div class="panel-header">
+        <h3>Resize Image</h3>
+        <button
+          class="close-button"
+          type="button"
+          onclick="closeTool('resize')"
+          aria-label="Close"
+        >
+          ×
+        </button>
+      </div>
+
+      <div class="control-grid">
+        <div class="field full">
+          <label for="resize-file">
+            Choose Photo
+          </label>
+          <input
+            id="resize-file"
+            class="file-input"
+            type="file"
+            accept="image/*"
+          >
         </div>
-        <div class="upload-box">
-          <input id="increaseInput" type="file" accept="image/*">
-          <label class="upload-label" for="increaseInput">Choose Photo</label>
+
+        <div class="field">
+          <label for="resize-width">Width (px)</label>
+          <input
+            id="resize-width"
+            type="number"
+            min="1"
+            value="800"
+          >
         </div>
-        <div class="preview-area" id="increasePreviewArea">
-          <img class="preview-image" id="increasePreview" alt="Increase size preview">
-          <div class="controls">
-            <div class="field">
-              <label for="increaseTarget">Target size (KB)</label>
-              <input id="increaseTarget" type="number" min="10" max="20000" value="500">
-            </div>
-          </div>
-          <div class="action-row">
-            <button class="primary-btn" onclick="increaseImageSize()">Create Target Size</button>
-          </div>
-          <div class="result" id="increaseResult"></div>
+
+        <div class="field">
+          <label for="resize-height">Height (px)</label>
+          <input
+            id="resize-height"
+            type="number"
+            min="1"
+            value="600"
+          >
+        </div>
+
+        <div class="field full">
+          <label>
+            <input
+              id="resize-lock"
+              type="checkbox"
+              checked
+            >
+            Keep aspect ratio
+          </label>
         </div>
       </div>
 
-      <div id="signature-resize" class="tool-panel">
-        <div class="panel-header">
-          <h2>🖊️ Resize Signature</h2>
-          <button class="danger-btn" onclick="closeTool('signature-resize')">Close</button>
-        </div>
-        <div class="upload-box">
-          <input id="signatureResizeInput" type="file" accept="image/*">
-          <label class="upload-label" for="signatureResizeInput">Choose Signature</label>
-        </div>
-        <div class="preview-area" id="signatureResizePreviewArea">
-          <img class="preview-image" id="signatureResizePreview" alt="Signature preview">
-          <div class="controls">
-            <div class="field">
-              <label for="signatureWidth">Width (px)</label>
-              <input id="signatureWidth" type="number" min="1" value="300">
-            </div>
-            <div class="field">
-              <label for="signatureHeight">Height (px)</label>
-              <input id="signatureHeight" type="number" min="1" value="100">
+<div class="button-row">
+        <button
+          class="primary-button"
+          type="button"
+          onclick="resizeImage()"
+        >
+          Resize Image
+        </button>
+      </div>
 
-</div>
-          </div>
-          <div class="action-row">
-            <button class="primary-btn" onclick="resizeSignature()">Resize & Download</button>
-          </div>
-          <div class="result" id="signatureResizeResult"></div>
+      <div class="preview-area" id="resize-preview">
+        <div class="empty-preview">
+          Choose an image to begin.
         </div>
       </div>
 
-      <div id="cm" class="tool-panel">
-        <div class="panel-header">
-          <h2>📏 Resize Image in Centimeter</h2>
-          <button class="da
+      <div class="status" id="resize-status"></div>
+    </section>
+
+    <section
+      class="tool-panel"
+      id="panel-convert"
+    >
+      <div class="panel-header">
+        <h3>Convert Image</h3>
+        <button
+          class="close-button"
+          type="button"
+          onclick="closeTool('convert')"
+          aria-label="Close"
+        >
+          ×
+        </button>
+      </div>
+
+      <div class="control-grid">
+        <div class="field full">
+          <label for="convert-file">
+            Choose Photo
+          </label>
+          <input
+            id="convert-file"
+            class="file-input"
+            type="file"
+            accept="image/*"
+          >
+        </div>
+
+        <div class="field">
+          <label for="convert-format">
+            Output format
+          </label>
+          <select id="convert-format">
+            <option value="image/jpeg">JPG</option>
+            <option value="image/png">PNG</option>
+            <option value="image/webp">WebP</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="convert-quality">
+            Quality
+          </label>
+          <input
+            id="convert-quality"
+            type="number"
+            min="1"
+            max="100"
+            value="90"
+          >
+        </div>
+      </div>
+
+      <div class="button-row">
+        <button
+          class="primary-button"
+          type="button"
+          onclick="convertImage()"
+        >
+          Convert Image
+        </button>
+      </div>
+
+      <div class="preview-area" id="convert-preview">
+        <div class="empty-preview">
+          Choose an image to begin.
+        </div>
+      </div>
+
+      <div class="status" id="convert-status"></div>
+    </section>
+
+    <section
+      class="tool-panel"
+      id="panel-crop"
+    >
+      <div class="panel-header">
+        <h3>Crop Image</h3>
+        <button
+          class="close-button"
+          type="button"
+          onclick="closeTool('crop')"
+          aria-label="Close"
+        >
+          ×
+        </button>
+      </div>
+
+      <div class="control-grid">
+        <div class="field full">
+          <label for="crop-file">
+            Choose Photo
+          </label>
+          <input
+            id="crop-file"
+            class="file-input"
+            type="file"
+            accept="image/*"
+          >
+        </div>
+
+        <div class="field">
+          <label for="crop-width">
+            Crop width (px)
+          </label>
+          <input
+            id="crop-width"
+            type="number"
+            min="1"
+            value="800"
+          >
+        </div>
+
+        <div class="field">
+          <label for="crop-height">
+            Crop height (px)
+          </label>
+          <input
+            id="crop-height"
+            type="number"
+            min="1"
+            value="600"
+          >
+        </div>
+      </div>
+
+      <div class="button-row">
+        <button
+          class="primary-button"
+          type="button"
+          onclick="cropImage()"
+        >
+          Crop Center
+        </button>
+      </div>
+
+      <div class="preview-area"U id="crop-preview">
+        <div class="empty-preview">
+          Choose an image to begin.
+        </div>
+      </div>
+
+      <div class="status" id="crop-status"></div>
+    </section>
+
+    <section
+      class="tool-panel"
+      id="panel-rotate"
+    >
+      <div class="panel-header">
+        <h3>Rotate & Flip</h3>
+        <button
+          class="close-button"
+          type="button"
+          on
