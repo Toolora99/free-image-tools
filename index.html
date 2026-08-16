@@ -1130,6 +1130,292 @@ sourceWidth = image.height * cellRatio;
     initializeSignature();
   });
 </script>
+Ojha:
+<script>
+(function () {
+  "use strict";
 
+  function scrollToTools() {
+    const tools = document.getElementById("tools");
+
+    if (tools) {
+      tools.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    }
+  }
+
+  function openTool(toolId) {
+    const panel = document.getElementById(toolId);
+
+    if (!panel) {
+      console.error("Tool panel not found:", toolId);
+      return;
+    }
+
+    document.querySelectorAll(".tool-panel").forEach(function (item) {
+      item.classList.remove("active");
+    });
+
+    panel.classList.add("active");
+
+    setTimeout(function () {
+      panel.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    }, 50);
+  }
+
+  function closeTool(toolId) {
+    const panel = document.getElementById(toolId);
+
+    if (panel) {
+      panel.classList.remove("active");
+    }
+
+    const tools = document.getElementById("tools");
+
+    if (tools) {
+      tools.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    }
+  }
+
+  window.scrollToTools = scrollToTools;
+  window.openTool = openTool;
+  window.closeTool = closeTool;
+
+  function setupPreview(inputId, previewId, previewAreaId) {
+    const input = document.getElementById(inputId);
+    const preview = document.getElementById(previewId);
+    const previewArea = document.getElementById(previewAreaId);
+
+    if (!input  !preview  !previewArea) {
+      return;
+    }
+
+    input.addEventListener("change", function () {
+      const file = input.files && input.files[0];
+
+      if (!file) {
+        return;
+      }
+
+      if (!file.type.startsWith("image/")) {
+        alert("Please select an image file.");
+        input.value = "";
+        return;
+      }
+
+      const reader = new FileReader();
+
+      reader.onload = function (event) {
+        preview.src = event.target.result;
+        previewArea.classList.add("active");
+      };
+
+      reader.onerror = function () {
+        alert("Could not read the selected image.");
+      };
+
+      reader.readAsDataURL(file);
+    });
+  }
+
+  setupPreview(
+    "passportInput",
+    "passportPreview",
+    "passportPreviewArea"
+  );
+
+  setupPreview(
+    "compressInput",
+    "compressPreview",
+    "compressPreviewArea"
+  );
+
+  setupPreview(
+    "pixelInput",
+    "pixelPreview",
+    "pixelPreviewArea"
+  );
+
+  setupPreview(
+    "increaseInput",
+    "increasePreview",
+    "increasePreviewArea"
+  );
+
+  setupPreview(
+    "signatureResizeInput",
+    "signatureResizePreview",
+    "signatureResizePreviewArea"
+  );
+
+  const collageInput = document.getElementById("collageInput");
+  const collagePreview = document.getElementById("collagePreview");
+
+  if (collageInput && collagePreview) {
+    collageInput.addEventListener("change", function () {
+      collagePreview.innerHTML = "";
+
+      const files = Array.from(collageInput.files || []).slice(0, 9);
+
+      if (!files.length) {
+        collagePreview.classList.add("hidden");
+        return;
+      }
+
+      collagePreview.classList.remove("hidden");
+
+      files.forEach(function (file) {
+        if (!file.type.startsWith("image/")) {
+          return;
+        }
+
+        const image = document.createElement("img");
+        const reader = new FileReader();
+
+        reader.onload = function (event) {
+          image.src = event.target.result;
+          image.alt = "Selected collage image";
+        };
+
+        reader.readAsDataURL(file);
+        collagePreview.appendChild(image);
+      });
+
+      const columns = document.getElementById("collageColumns");
+
+      if (columns) {
+        collagePreview.style.gridTemplateColumns =
+          "repeat(" + Math.max(1, Math.min(4, Number(columns.value) || 2)) + ", 1fr)";
+      }
+    });
+  }
+
+  const collageColumns = document.getElementById("collageColumns");
+
+  if (collageColumns && collagePreview) {
+    collageColumns.addEventListener("input", function () {
+      const value = Math.max(
+        1,
+        Math.min(4, Number(collageColumns.value) || 2)
+      );
+
+      collagePreview.style.gridTemplateColumns =
+        "repeat(" + value + ", 1fr)";
+    });
+  }
+
+const signatureCanvas = document.getElementById("signatureCanvas");
+
+  if (signatureCanvas) {
+    const context = signatureCanvas.getContext("2d");
+
+    if (context) {
+      let drawing = false;
+
+      context.lineWidth = 4;
+      context.lineCap = "round";
+      context.lineJoin = "round";
+      context.strokeStyle = "#000000";
+
+      function getPosition(event) {
+        const rect = signatureCanvas.getBoundingClientRect();
+
+        const source = event.touches
+          ? event.touches[0]
+          : event;
+
+        return {
+          x:
+            (source.clientX - rect.left) *
+            (signatureCanvas.width / rect.width),
+          y:
+            (source.clientY - rect.top) *
+            (signatureCanvas.height / rect.height)
+        };
+      }
+
+      function startDrawing(event) {
+        event.preventDefault();
+        drawing = true;
+
+        const position = getPosition(event);
+
+        context.beginPath();
+        context.moveTo(position.x, position.y);
+      }
+
+      function draw(event) {
+        if (!drawing) {
+          return;
+        }
+
+        event.preventDefault();
+
+        const position = getPosition(event);
+
+        context.lineTo(position.x, position.y);
+        context.stroke();
+      }
+
+      function stopDrawing(event) {
+        if (event) {
+          event.preventDefault();
+        }
+
+        drawing = false;
+        context.closePath();
+      }
+
+      signatureCanvas.addEventListener(
+        "pointerdown",
+        startDrawing
+      );
+
+      signatureCanvas.addEventListener(
+        "pointermove",
+        draw
+      );
+
+      signatureCanvas.addEventListener(
+        "pointerup",
+        stopDrawing
+      );
+
+      signatureCanvas.addEventListener(
+        "pointercancel",
+        stopDrawing
+      );
+
+      window.clearSignature = function () {
+        context.clearRect(
+          0,
+          0,
+          signatureCanvas.width,
+          signatureCanvas.height
+        );
+      };
+
+      window.downloadSignature = function () {
+        const link = document.createElement("a");
+
+        link.download = "signature.png";
+        link.href = signatureCanvas.toDataURL("image/png");
+
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+      };
+    }
+  }
+})();
+</script>
 </body>
 </html>
