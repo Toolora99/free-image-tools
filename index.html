@@ -3,956 +3,1133 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-  <meta
-    name="description"
-    content="Free online image tools. Resize, compress, crop, convert, create passport photos, signatures and collages directly in your browser."
-  >
-  <meta
-    name="theme-color"
-    content="#2563eb"
-  >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Free online image tools. Resize, compress, crop, convert, passport photos, signatures and collages.">
   <title>Free Image Tools</title>
 
   <style>
-    :root {
-      --primary: #2563eb;
-      --primary-dark: #1d4ed8;
-      --background: #f5f7fb;
-      --surface: #ffffff;
-      --text: #172033;
-      --muted: #687086;
-      --border: #dce1eb;
-      --success: #168653;
-      --danger: #c83d3d;
-      --shadow: 0 8px 25px rgba(23, 32, 51, 0.08);
-      --radius: 16px;
-    }
-
     * {
       box-sizing: border-box;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
-
     body {
       margin: 0;
-      min-height: 100vh;
-      background: var(--background);
-      color: var(--text);
-      font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Roboto,
-        Arial,
-        sans-serif;
-      line-height: 1.5;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f4f7fb;
+      color: #17202a;
     }
 
-    button,
-    input,
-    select {
-      font: inherit;
-    }
-
-    button {
-      cursor: pointer;
-      touch-action: manipulation;
-    }
-
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: var(--primary);
+    header {
+      background: #0866d6;
       color: white;
-      box-shadow: 0 3px 15px rgba(0, 0, 0, 0.12);
-    }
-
-    .header-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 18px 22px;
+      padding: 22px 5%;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 20px;
+      flex-wrap: wrap;
     }
 
-    .brand {
-      color: white;
-      text-decoration: none;
+    header h1 {
+      margin: 0 0 6px;
+      font-size: 26px;
     }
 
-    .brand h1 {
+    header p {
       margin: 0;
-      font-size: clamp(1.25rem, 3vw, 1.7rem);
+      opacity: 0.9;
     }
 
-    .brand p {
-      margin: 3px 0 0;
-      opacity: 0.88;
-      font-size: 0.9rem;
-    }
-
-    .all-tools-button {
-      border: 0;
-      background: white;
-      color: var(--primary);
-      padding: 11px 18px;
-      border-radius: 10px;
-      font-weight: 700;
-      min-height: 44px;
-    }
-
-    main {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 34px 20px 70px;
-    }
-
-    .hero {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-
-    .hero h2 {
-      margin: 0 0 8px;
-      font-size: clamp(2rem, 5vw, 3.2rem);
-      line-height: 1.15;
-    }
-
-    .hero p {
-      margin: 0 auto;
-      max-width: 720px;
-      color: var(--muted);
-      font-size: 1.05rem;
+    .container {
+      width: min(1100px, 94%);
+      margin: 30px auto;
     }
 
     .privacy {
-      margin: 24px auto 35px;
-      max-width: 900px;
-      padding: 15px 20px;
-      border: 1px solid #cfe7d8;
-      background: #f0faf3;
-      color: #25623c;
+      background: #eaf7ed;
+      border: 1px solid #b7dfc0;
+      padding: 15px 18px;
       border-radius: 12px;
-      text-align: center;
+      margin-bottom: 28px;
+      color: #185c28;
     }
 
-    .tool-section h3 {
-      margin: 0 0 6px;
-      font-size: 1.6rem;
+    h2 {
+      margin-bottom: 8px;
     }
 
-    .section-description {
-      margin: 0 0 20px;
-      color: var(--muted);
+    .subtitle {
+      color: #65727e;
+      margin-top: 0;
     }
 
-    .tool-grid {
+    .tools {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 18px;
     }
 
-    .tool-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
+    .tool {
+      background: white;
+      border-radius: 16px;
       padding: 22px;
-      box-shadow: var(--shadow);
-      display: flex;
-      flex-direction: column;
-      min-height: 190px;
+      border: 1px solid #dce3ea;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
     }
 
-    .tool-icon {
-      width: 50px;
-      height: 50px;
-      border-radius: 13px;
-      background: #e9f0ff;
-      display: grid;
-      place-items: center;
-      font-size: 1.7rem;
-      margin-bottom: 14px;
+    .tool h3 {
+      margin-top: 0;
+      margin-bottom: 8px;
     }
 
-    .tool-card h4 {
-      margin: 0 0 6px;
-      font-size: 1.2rem;
+    .tool p {
+      color: #687582;
+      min-height: 42px;
     }
 
-    .tool-card p {
-      margin: 0 0 18px;
-      color: var(--muted);
-    }
-
-    .tool-card button {
-      margin-top: auto;
-    }
-
-    .primary-button,
-    .secondary-button,
-    .danger-button {
+    button,
+    .button {
       border: 0;
-      border-radius: 10px;
-      min-height: 46px;
-      padding: 10px 18px;
-      font-weight: 700;
-    }
-
-    .primary-button {
-      background: var(--primary);
+      border-radius: 9px;
+      padding: 11px 16px;
+      background: #0866d6;
       color: white;
+      cursor: pointer;
+      font-size: 15px;
+      text-decoration: none;
+      display: inline-block;
     }
 
-    .primary-button:hover {
-      background: var(--primary-dark);
+    button:hover,
+    .button:hover {
+      background: #0754b1;
     }
 
-.secondary-button {
-      background: #edf1f7;
-      color: var(--text);
+    button.secondary {
+      background: #687582;
     }
 
-    .danger-button {
-      background: #fdecec;
-      color: var(--danger);
+    button.success {
+      background: #18864b;
+    }
+
+    button.danger {
+      background: #c83b3b;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 11px;
+      margin: 6px 0 10px;
+      border: 1px solid #cbd5df;
+      border-radius: 8px;
+      background: white;
+      font-size: 15px;
+    }
+
+    label {
+      font-weight: 600;
+      display: block;
+      margin-top: 10px;
     }
 
     .tool-panel {
       display: none;
       margin-top: 30px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 24px;
-      box-shadow: var(--shadow);
+      background: white;
+      padding: 25px;
+      border-radius: 16px;
+      border: 1px solid #dce3ea;
     }
 
     .tool-panel.active {
       display: block;
-      animation: panel-in 0.18s ease-out;
     }
 
-    @keyframes panel-in {
-      from {
-        opacity: 0;
-        transform: translateY(5px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .panel-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 15px;
-      margin-bottom: 20px;
-    }
-
-    .panel-header h3 {
-      margin: 0;
-      font-size: 1.5rem;
-    }
-
-    .close-button {
-      width: 44px;
-      height: 44px;
-      border: 0;
-      border-radius: 50%;
-      background: #edf1f7;
-      font-size: 1.3rem;
-      color: var(--text);
-    }
-
-    .control-grid {
+    .controls {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin: 18px 0;
     }
 
-    .field {
-      display: flex;
-      flex-direction: column;
-      gap: 7px;
-    }
-
-    .field.full {
-      grid-column: 1 / -1;
-    }
-
-    .field label {
-      font-weight: 700;
-      font-size: 0.93rem;
-    }
-
-    .field input,
-    .field select {
-      width: 100%;
-      min-height: 46px;
-      padding: 9px 12px;
-      border: 1px solid var(--border);
-      border-radius: 9px;
-      background: white;
-      color: var(--text);
-    }
-
-    .file-input {
-      padding: 8px !important;
-    }
-
-    .button-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 18px;
-    }
-
-    .preview-area {
+    .preview {
       margin-top: 20px;
-      min-height: 160px;
-      border: 2px dashed var(--border);
+      padding: 20px;
+      border: 2px dashed #cbd5df;
       border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 15px;
-      background: #fafbfe;
-      overflow: hidden;
+      text-align: center;
+      background: #fafcff;
     }
 
-    .preview-area img,
-    .preview-area canvas {
+    .preview img,
+    .preview canvas {
       max-width: 100%;
       max-height: 500px;
-      display: block;
-      object-fit: contain;
+      border-radius: 8px;
     }
 
-    .empty-preview {
-      color: var(--muted);
-      text-align: center;
-    }
-
-    .status {
-      margin-top: 15px;
-      padding: 12px 15px;
-      border-radius: 9px;
+    .message {
+      padding: 12px;
+      border-radius: 8px;
+      margin: 12px 0;
       display: none;
     }
 
-    .status.show {
+    .message.error {
       display: block;
+      background: #ffe8e8;
+      color: #9b1c1c;
     }
 
-    .status.success {
-      background: #eaf8ef;
-      color: #146c3f;
-    }
-
-    .status.error {
-      background: #fff0f0;
-      color: #9d2929;
-    }
-
-    .status.info {
-      background: #edf4ff;
-      color: #24559f;
-    }
-
-    .canvas-wrapper {
-      overflow: auto;
-      max-width: 100%;
-    }
-
-    .signature-pad {
-      width: 100%;
-      height: 260px;
-      border: 2px solid var(--border);
-      border-radius: 10px;
-      background: white;
-      touch-action: none;
+    .message.info {
       display: block;
+      background: #e8f2ff;
+      color: #1455a0;
     }
 
-    .collage-preview {
-      display: grid;
-      gap: 8px;
-      width: 100%;
-    }
-
-    .collage-preview img {
-      width: 100%;
-      height: auto;
-      display: block;
-      border-radius: 4px;
+    .result-info {
+      margin-top: 10px;
+      color: #586674;
     }
 
     footer {
       text-align: center;
-      color: var(--muted);
-      padding: 30px 20px 45px;
+      padding: 35px 10px;
+      color: #71808d;
     }
 
-    footer p {
-      margin: 5px 0;
+    .hidden {
+      display: none !important;
     }
 
-    @media (max-width: 700px) {
-      .header-inner {
-        padding: 14px 15px;
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 22px;
       }
 
-      main {
-        padding: 25px 14px 55px;
-      }
-
-      .tool-grid,
-      .control-grid {
-        grid-template-columns: 1fr;
+      .container {
+        width: 92%;
       }
 
       .tool-panel {
         padding: 18px;
-      }
-
-      .hero h2 {
-        font-size: 2rem;
-      }
-
-      .button-row {
-        flex-direction: column;
-      }
-
-      .button-row button {
-        width: 100%;
       }
     }
   </style>
 </head>
 
 <body>
-  <header class="site-header">
-    <div class="header-inner">
-      <a class="brand" href="#">
-        <h1>Free Image Tools</h1>
-        <p>Simple · Private · Free</p>
-      </a>
 
-<button
-        class="all-tools-button"
-        type="button"
-        onclick="scrollToTools()"
-      >
-        All Tools
-      </button>
+<header>
+  <div>
+    <h1>Free Image Tools</h1>
+    <p>Simple • Private • Free</p>
+  </div>
+</header>
+
+<main class="container">
+
+<div class="privacy">
+    🔒 <strong>Your images stay private.</strong>
+    All processing happens locally in your browser. Images are not uploaded to a server.
+  </div>
+
+  <h2>Free Online Image Tools</h2>
+  <p class="subtitle">
+    Resize, compress, crop, convert, create passport photos, signatures and collages directly in your browser.
+  </p>
+
+  <section class="tools">
+
+    <article class="tool">
+      <h3>🪪 Passport Photo Maker</h3>
+      <p>Create a 35 × 45 mm passport-size photo.</p>
+      <button onclick="openTool('passport')">Open Tool</button>
+    </article>
+
+    <article class="tool">
+      <h3>📉 Reduce Image Size in KB</h3>
+      <p>Compress an image to a target file size.</p>
+      <button onclick="openTool('compress')">Open Tool</button>
+    </article>
+
+    <article class="tool">
+      <h3>📐 Resize Image</h3>
+      <p>Change image width and height.</p>
+      <button onclick="openTool('resize')">Open Tool</button>
+    </article>
+
+    <article class="tool">
+      <h3>✂️ Crop Image</h3>
+      <p>Crop an image to your required dimensions.</p>
+      <button onclick="openTool('crop')">Open Tool</button>
+    </article>
+
+    <article class="tool">
+      <h3>🔄 Convert Image</h3>
+      <p>Convert images between JPG, PNG and WebP.</p>
+      <button onclick="openTool('convert')">Open Tool</button>
+    </article>
+
+    <article class="tool">
+      <h3>✍️ Signature Maker</h3>
+      <p>Draw and download a transparent signature.</p>
+      <button onclick="openTool('signature')">Open Tool</button>
+    </article>
+
+    <article class="tool">
+      <h3>🖼️ Image Collage</h3>
+      <p>Combine multiple images into one image.</p>
+      <button onclick="openTool('collage')">Open Tool</button>
+    </article>
+
+  </section>
+
+  <div id="message" class="message"></div>
+
+  <!-- RESIZE -->
+  <section id="resize" class="tool-panel">
+    <h2>Resize Image</h2>
+
+    <label>Select image</label>
+    <input id="resizeFile" type="file" accept="image/*">
+
+    <div class="controls">
+      <div>
+        <label>Width</label>
+        <input id="resizeWidth" type="number" min="1" placeholder="Width">
+      </div>
+
+      <div>
+        <label>Height</label>
+        <input id="resizeHeight" type="number" min="1" placeholder="Height">
+      </div>
     </div>
-  </header>
 
-  <main>
-    <section class="hero">
-      <h2>Free Online Image Tools</h2>
-      <p>
-        Resize, compress, crop, convert, create passport photos,
-        signatures and collages directly in your browser.
-      </p>
-    </section>
+    <label>
+      <input id="resizeLock" type="checkbox" checked style="width:auto;">
+      Keep aspect ratio
+    </label>
 
-    <div class="privacy">
-      🔒 Your images are processed locally in your browser.
-      They are not uploaded to a server.
+    <button onclick="resizeImage()">Resize & Download</button>
+
+    <div id="resizePreview" class="preview"></div>
+  </section>
+
+  <!-- COMPRESS -->
+  <section id="compress" class="tool-panel">
+    <h2>Reduce Image Size in KB</h2>
+
+    <label>Select image</label>
+    <input id="compressFile" type="file" accept="image/*">
+
+    <label>Target size in KB</label>
+    <input id="targetKB" type="number" min="5" value="100">
+
+    <button onclick="compressImage()">Compress & Download</button>
+
+    <div id="compressPreview" class="preview"></div>
+  </section>
+
+  <!-- PASSPORT -->
+  <section id="passport" class="tool-panel">
+    <h2>Passport Photo Maker</h2>
+
+    <p>
+      Standard passport size: <strong>35 × 45 mm</strong>.
+    </p>
+
+    <label>Select photo</label>
+    <input id="passportFile" type="file" accept="image/*">
+
+    <button onclick="createPassport()">Create Passport Photo</button>
+
+    <div id="passportPreview" class="preview"></div>
+  </section>
+
+  <!-- CROP -->
+  <section id="crop" class="tool-panel">
+    <h2>Crop Image</h2>
+
+    <label>Select image</label>
+    <input id="cropFile" type="file" accept="image/*">
+
+    <div class="controls">
+      <div>
+        <label>Width</label>
+        <input id="cropWidth" type="number" min="1" value="500">
+      </div>
+
+      <div>
+        <label>Height</label>
+        <input id="cropHeight" type="number" min="1" value="500">
+      </div>
     </div>
 
-    <section class="tool-section" id="tools">
-      <h3>Image Tools</h3>
-      <p class="section-description">
-        Choose a free tool below.
-      </p>
+    <button onclick="cropImage()">Crop & Download</button>
 
-      <div class="tool-grid">
-        <article class="tool-card">
-          <div class="tool-icon">🪪</div>
-          <h4>Passport Photo Maker</h4>
-          <p>Create a 35 × 45 mm passport-size photo.</p>
-          <button
-            class="primary-button"
-            type="button"
-            onclick="openTool('passport')"
-          >
-            Open Tool
-          </button>
-        </article>
+    <div id="cropPreview" class="preview"></div>
+  </section>
 
-        <article class="tool-card">
-          <div class="tool-icon">📉</div>
-          <h4>Reduce Image Size in KB</h4>
-          <p>Compress an image to a target file size.</p>
-          <button
-            class="primary-button"
-            type="button"
-            onclick="openTool('compress')"
-          >
-            Open Tool
-          </button>
-        </article>
+  <!-- CONVERT -->
+  <section id="convert" class="tool-panel">
+    <h2>Convert Image</h2>
 
-        <article class="tool-card">
-          <div class="tool-icon">📐</div>
-          <h4>Resize Image</h4>
-          <p>Change image width and height.</p>
-          <button
-            class="primary-button"
-            type="button"
-            onclick="openTool('resize')"
-          >
-            Open Tool
-          </button>
-        </article>
+<label>Select image</label>
+    <input id="convertFile" type="file" accept="image/*">
 
-        <article class="tool-card">
-          <div class="tool-icon">🔄</div>
-          <h4>Convert Image</h4>
-          <p>Convert JPG, PNG and WebP images.</p>
-          <button
-            class="primary-button"
-            type="button"
-            onclick="openTool('convert')"
-          >
-            Open Tool
-          </button>
-        </article>
+    <label>Output format</label>
+    <select id="convertFormat">
+      <option value="image/jpeg">JPG</option>
+      <option value="image/png">PNG</option>
+      <option value="image/webp">WebP</option>
+    </select>
 
-        <article class="tool-card">
-          <div class="tool-icon">✂️</div>
-          <h4>Crop Image</h4>
-          <p>Crop an image to a custom aspect ratio.</p>
-          <button
-            class="primary-button"
-            type="button"
-            onclick="openTool('crop')"
-          >
-            Open Tool
-          </button>
-        </article>
+    <label>Quality</label>
+    <input id="convertQuality" type="range" min="0.1" max="1" step="0.05" value="0.9">
 
-        <article class="tool-card">
-          <div class="tool-icon">↻</div>
-          <h4>Rotate & Flip</h4>
-          <p>Rotate or flip your image instantly.</p>
-          <button
-            class="primary-button"
-            type="button"
-            onclick="openTool('rotate')"
-          >
-            Open Tool
-          </button>
-        </article>
+    <button onclick="convertImage()">Convert & Download</button>
 
-        <article class="tool-card">
-          <div class="tool-icon">✍️</div>
-          <h4>Signature Maker</h4>
-          <p>Draw and download a transparent signature.</p>
-          <button
-            class="primary-button"
-            type="button"
-            onclick="openTool('signature')"
-          >
-            Open Tool
-          </button>
-        </article>
+    <div id="convertPreview" class="preview"></div>
+  </section>
 
-        <article class="tool-card">
-          <div class="tool-icon">🖼️</div>
-          <h4>Photo Collage</h4>
-          <p>Combine multiple images into one collage.</p>
-          <button
-            class="primary-button"
-            type="button"
-            onclick="openTool('collage')"
-          >
-            Open Tool
-          </button>
-        </article>
-      </div>
-    </section>
+  <!-- SIGNATURE -->
+  <section id="signature" class="tool-panel">
+    <h2>Signature Maker</h2>
 
-    <section
-      class="tool-panel"
-      id="panel-passport"
-    >
-      <div class="panel-header">
-        <h3>Passport Photo Maker</h3>
-        <button
-          class="close-button"
-          type="button"
-          onclick="closeTool('passport')"
-          aria-label="Close"
-        >
-          ×
-        </button>
-      </div>
+    <p>Use your finger, mouse or stylus to draw your signature.</p>
 
-<div class="control-grid">
-        <div class="field full">
-          <label for="passport-file">Choose Photo</label>
-          <input
-            id="passport-file"
-            class="file-input"
-            type="file"
-            accept="image/*"
-          >
-        </div>
+    <div class="preview">
+      <canvas
+        id="signatureCanvas"
+        width="800"
+        height="350"
+        style="width:100%;background:white;border:1px solid #ccd5dd;touch-action:none;"
+      ></canvas>
+    </div>
 
-        <div class="field">
-          <label for="passport-width">
-            Width in pixels
-          </label>
-          <input
-            id="passport-width"
-            type="number"
-            min="100"
-            value="413"
-          >
-        </div>
+    <br>
 
-        <div class="field">
-          <label for="passport-height">
-            Height in pixels
-          </label>
-          <input
-            id="passport-height"
-            type="number"
-            min="100"
-            value="531"
-          >
-        </div>
-      </div>
+    <button onclick="clearSignature()" class="secondary">
+      Clear
+    </button>
 
-      <div class="button-row">
-        <button
-          class="primary-button"
-          type="button"
-          onclick="createPassportPhoto()"
-        >
-          Create Passport Photo
-        </button>
-      </div>
+    <button onclick="downloadSignature()" class="success">
+      Download Signature
+    </button>
+  </section>
 
-      <div class="preview-area" id="passport-preview">
-        <div class="empty-preview">
-          Choose an image to begin.
-        </div>
-      </div>
+  <!-- COLLAGE -->
+  <section id="collage" class="tool-panel">
+    <h2>Image Collage</h2>
 
-      <div class="status" id="passport-status"></div>
-    </section>
+    <label>Select multiple images</label>
+    <input id="collageFiles" type="file" accept="image/*" multiple>
 
-    <section
-      class="tool-panel"
-      id="panel-compress"
-    >
-      <div class="panel-header">
-        <h3>Reduce Image Size in KB</h3>
-        <button
-          class="close-button"
-          type="button"
-          onclick="closeTool('compress')"
-          aria-label="Close"
-        >
-          ×
-        </button>
-      </div>
+    <label>Images per row</label>
+    <select id="collageColumns">
+      <option value="1">1</option>
+      <option value="2" selected>2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+    </select>
 
-      <div class="control-grid">
-        <div class="field full">
-          <label for="compress-file">
-            Choose Photo
-          </label>
-          <input
-            id="compress-file"
-            class="file-input"
-            type="file"
-            accept="image/*"
-          >
-        </div>
+    <button onclick="createCollage()">Create Collage & Download</button>
 
-        <div class="field">
-          <label for="compress-size">
-            Target size (KB)
-          </label>
-          <input
-            id="compress-size"
-            type="number"
-            min="1"
-            value="100"
-          >
-        </div>
-      </div>
+    <div id="collagePreview" class="preview"></div>
+  </section>
 
-      <div class="button-row">
-        <button
-          class="primary-button"
-          type="button"
-          onclick="compressImage()"
-        >
-          Compress Image
-        </button>
-      </div>
+</main>
 
-      <div class="preview-area" id="compress-preview">
-        <div class="empty-preview">
-          Choose an image to begin.
-        </div>
-      </div>
+<footer>
+  Free Image Tools — Private browser-based image processing
+</footer>
 
-      <div class="status" id="compress-status"></div>
-    </section>
+<script>
+  let signatureDrawing = false;
+  let signatureCanvas;
+  let signatureContext;
 
-    <section
-      class="tool-panel"
-      id="panel-resize"
-    >
-      <div class="panel-header">
-        <h3>Resize Image</h3>
-        <button
-          class="close-button"
-          type="button"
-          onclick="closeTool('resize')"
-          aria-label="Close"
-        >
-          ×
-        </button>
-      </div>
+  function openTool(id) {
+    document.querySelectorAll(".tool-panel").forEach(panel => {
+      panel.classList.remove("active");
+    });
 
-      <div class="control-grid">
-        <div class="field full">
-          <label for="resize-file">
-            Choose Photo
-          </label>
-          <input
-            id="resize-file"
-            class="file-input"
-            type="file"
-            accept="image/*"
-          >
-        </div>
+    const panel = document.getElementById(id);
 
-        <div class="field">
-          <label for="resize-width">Width (px)</label>
-          <input
-            id="resize-width"
-            type="number"
-            min="1"
-            value="800"
-          >
-        </div>
+    if (!panel) {
+      showMessage("Tool could not be opened.", true);
+      return;
+    }
 
-        <div class="field">
-          <label for="resize-height">Height (px)</label>
-          <input
-            id="resize-height"
-            type="number"
-            min="1"
-            value="600"
-          >
-        </div>
+    panel.classList.add("active");
+    panel.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
 
-        <div class="field full">
-          <label>
-            <input
-              id="resize-lock"
-              type="checkbox"
-              checked
-            >
-            Keep aspect ratio
-          </label>
-        </div>
-      </div>
+    if (id === "signature") {
+      initializeSignature();
+    }
 
-<div class="button-row">
-        <button
-          class="primary-button"
-          type="button"
-          onclick="resizeImage()"
-        >
-          Resize Image
-        </button>
-      </div>
+    clearMessage();
+  }
 
-      <div class="preview-area" id="resize-preview">
-        <div class="empty-preview">
-          Choose an image to begin.
-        </div>
-      </div>
+  function showMessage(text, error = false) {
+    const element = document.getElementById("message");
 
-      <div class="status" id="resize-status"></div>
-    </section>
+    element.textContent = text;
+    element.className = "message " + (error ? "error" : "info");
+  }
 
-    <section
-      class="tool-panel"
-      id="panel-convert"
-    >
-      <div class="panel-header">
-        <h3>Convert Image</h3>
-        <button
-          class="close-button"
-          type="button"
-          onclick="closeTool('convert')"
-          aria-label="Close"
-        >
-          ×
-        </button>
-      </div>
+  function clearMessage() {
+    const element = document.getElementById("message");
 
-      <div class="control-grid">
-        <div class="field full">
-          <label for="convert-file">
-            Choose Photo
-          </label>
-          <input
-            id="convert-file"
-            class="file-input"
-            type="file"
-            accept="image/*"
-          >
-        </div>
+    element.textContent = "";
+    element.className = "message";
+  }
 
-        <div class="field">
-          <label for="convert-format">
-            Output format
-          </label>
-          <select id="convert-format">
-            <option value="image/jpeg">JPG</option>
-            <option value="image/png">PNG</option>
-            <option value="image/webp">WebP</option>
-          </select>
-        </div>
+  function loadImage(file) {
+    return new Promise((resolve, reject) => {
+      if (!file) {
+        reject(new Error("Please select an image first."));
+        return;
+      }
 
-        <div class="field">
-          <label for="convert-quality">
-            Quality
-          </label>
-          <input
-            id="convert-quality"
-            type="number"
-            min="1"
-            max="100"
-            value="90"
-          >
-        </div>
-      </div>
+      if (!file.type.startsWith("image/")) {
+        reject(new Error("Please select a valid image file."));
+        return;
+      }
 
-      <div class="button-row">
-        <button
-          class="primary-button"
-          type="button"
-          onclick="convertImage()"
-        >
-          Convert Image
-        </button>
-      </div>
+      const url = URL.createObjectURL(file);
+      const image = new Image();
 
-      <div class="preview-area" id="convert-preview">
-        <div class="empty-preview">
-          Choose an image to begin.
-        </div>
-      </div>
+      image.onload = () => {
+        URL.revokeObjectURL(url);
+        resolve(image);
+      };
 
-      <div class="status" id="convert-status"></div>
-    </section>
+      image.onerror = () => {
+        URL.revokeObjectURL(url);
+        reject(new Error("The image could not be loaded."));
+      };
 
-    <section
-      class="tool-panel"
-      id="panel-crop"
-    >
-      <div class="panel-header">
-        <h3>Crop Image</h3>
-        <button
-          class="close-button"
-          type="button"
-          onclick="closeTool('crop')"
-          aria-label="Close"
-        >
-          ×
-        </button>
-      </div>
+      image.src = url;
+    });
+  }
 
-      <div class="control-grid">
-        <div class="field full">
-          <label for="crop-file">
-            Choose Photo
-          </label>
-          <input
-            id="crop-file"
-            class="file-input"
-            type="file"
-            accept="image/*"
-          >
-        </div>
+  function canvasToBlob(canvas, type = "image/jpeg", quality = 0.9) {
+    return new Promise((resolve, reject) => {
+      canvas.toBlob(
+        blob => {
+          if (!blob) {
+            reject(new Error("Could not create image."));
+            return;
+          }
 
-        <div class="field">
-          <label for="crop-width">
-            Crop width (px)
-          </label>
-          <input
-            id="crop-width"
-            type="number"
-            min="1"
-            value="800"
-          >
-        </div>
+          resolve(blob);
+        },
+        type,
+        quality
+      );
+    });
+  }
 
-        <div class="field">
-          <label for="crop-height">
-            Crop height (px)
-          </label>
-          <input
-            id="crop-height"
-            type="number"
-            min="1"
-            value="600"
-          >
-        </div>
-      </div>
+  function downloadBlob(blob, filename) {
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
 
-      <div class="button-row">
-        <button
-          class="primary-button"
-          type="button"
-          onclick="cropImage()"
-        >
-          Crop Center
-        </button>
-      </div>
+    link.href = url;
+    link.download = filename;
 
-      <div class="preview-area"U id="crop-preview">
-        <div class="empty-preview">
-          Choose an image to begin.
-        </div>
-      </div>
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
 
-      <div class="status" id="crop-status"></div>
-    </section>
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
 
-    <section
-      class="tool-panel"
-      id="panel-rotate"
-    >
-      <div class="panel-header">
-        <h3>Rotate & Flip</h3>
-        <button
-          class="close-button"
-          type="button"
-          on
+function showCanvas(containerId, canvas) {
+    const container = document.getElementById(containerId);
+
+    container.innerHTML = "";
+    container.appendChild(canvas);
+  }
+
+  async function resizeImage() {
+    try {
+      clearMessage();
+
+      const file = document.getElementById("resizeFile").files[0];
+      const widthInput = document.getElementById("resizeWidth");
+      const heightInput = document.getElementById("resizeHeight");
+      const keepRatio = document.getElementById("resizeLock").checked;
+
+      const image = await loadImage(file);
+
+      let width = Number(widthInput.value);
+      let height = Number(heightInput.value);
+
+      if (!width || width < 1) {
+        width = image.width;
+      }
+
+      if (!height || height < 1) {
+        height = image.height;
+      }
+
+      if (keepRatio) {
+        height = Math.round(width * image.height / image.width);
+        heightInput.value = height;
+      }
+
+      const canvas = document.createElement("canvas");
+
+      canvas.width = width;
+      canvas.height = height;
+
+      const context = canvas.getContext("2d");
+
+      context.drawImage(image, 0, 0, width, height);
+
+      const blob = await canvasToBlob(canvas, "image/jpeg", 0.92);
+
+      showCanvas("resizePreview", canvas);
+      downloadBlob(blob, "resized-image.jpg");
+
+      showMessage("Image resized successfully.");
+    } catch (error) {
+      showMessage(error.message, true);
+    }
+  }
+
+  async function compressImage() {
+    try {
+      clearMessage();
+
+      const file = document.getElementById("compressFile").files[0];
+      const targetKB = Number(document.getElementById("targetKB").value);
+
+      if (!targetKB || targetKB < 5) {
+        throw new Error("Target size must be at least 5 KB.");
+      }
+
+      const image = await loadImage(file);
+
+      let width = image.width;
+      let height = image.height;
+      let quality = 0.92;
+      let blob = null;
+
+      for (let attempt = 0; attempt < 18; attempt++) {
+        const canvas = document.createElement("canvas");
+
+        canvas.width = width;
+        canvas.height = height;
+
+        const context = canvas.getContext("2d");
+
+        context.drawImage(image, 0, 0, width, height);
+
+        blob = await canvasToBlob(
+          canvas,
+          "image/jpeg",
+          quality
+        );
+
+        if (blob.size <= targetKB * 1024) {
+          showCanvas("compressPreview", canvas);
+          downloadBlob(blob, "compressed-image.jpg");
+
+          showMessage(
+            Compressed successfully: ${Math.round(blob.size / 1024)} KB.
+          );
+
+          return;
+        }
+
+        if (quality > 0.35) {
+          quality -= 0.08;
+        } else {
+          width = Math.round(width * 0.85);
+          height = Math.round(height * 0.85);
+        }
+      }
+
+      if (blob) {
+        downloadBlob(blob, "compressed-image.jpg");
+        showMessage(
+          "The image was compressed as much as possible, but the exact target size could not be reached."
+        );
+      }
+    } catch (error) {
+      showMessage(error.message, true);
+    }
+  }
+
+  async function createPassport() {
+    try {
+      clearMessage();
+
+      const file = document.getElementById("passportFile").files[0];
+      const image = await loadImage(file);
+
+      const width = 413;
+      const height = 531;
+
+      const canvas = document.createElement("canvas");
+
+      canvas.width = width;
+      canvas.height = height;
+
+      const context = canvas.getContext("2d");
+
+      const sourceRatio = image.width / image.height;
+      const targetRatio = width / height;
+
+      let sourceWidth;
+      let sourceHeight;
+      let sourceX;
+      let sourceY;
+
+      if (sourceRatio > targetRatio) {
+        sourceHeight = image.height;
+        sourceWidth = image.height * targetRatio;
+        sourceX = (image.width - sourceWidth) / 2;
+        sourceY = 0;
+      } else {
+        sourceWidth = image.width;
+        sourceHeight = image.width / targetRatio;
+        sourceX = 0;
+        sourceY = (image.height - sourceHeight) / 2;
+      }
+
+context.fillStyle = "#ffffff";
+      context.fillRect(0, 0, width, height);
+
+      context.drawImage(
+        image,
+        sourceX,
+        sourceY,
+        sourceWidth,
+        sourceHeight,
+        0,
+        0,
+        width,
+        height
+      );
+
+      const blob = await canvasToBlob(
+        canvas,
+        "image/jpeg",
+        0.95
+      );
+
+      showCanvas("passportPreview", canvas);
+      downloadBlob(blob, "passport-photo-35x45mm.jpg");
+
+      showMessage(
+        "Passport photo created successfully at 35 × 45 mm ratio."
+      );
+    } catch (error) {
+      showMessage(error.message, true);
+    }
+  }
+
+  async function cropImage() {
+    try {
+      clearMessage();
+
+      const file = document.getElementById("cropFile").files[0];
+      const cropWidth = Number(
+        document.getElementById("cropWidth").value
+      );
+      const cropHeight = Number(
+        document.getElementById("cropHeight").value
+      );
+
+      if (!cropWidth || !cropHeight) {
+        throw new Error("Enter crop width and height.");
+      }
+
+      const image = await loadImage(file);
+
+      const targetRatio = cropWidth / cropHeight;
+      const imageRatio = image.width / image.height;
+
+      let sourceWidth;
+      let sourceHeight;
+      let sourceX;
+      let sourceY;
+
+      if (imageRatio > targetRatio) {
+        sourceHeight = image.height;
+        sourceWidth = image.height * targetRatio;
+        sourceX = (image.width - sourceWidth) / 2;
+        sourceY = 0;
+      } else {
+        sourceWidth = image.width;
+        sourceHeight = image.width / targetRatio;
+        sourceX = 0;
+        sourceY = (image.height - sourceHeight) / 2;
+      }
+
+      const canvas = document.createElement("canvas");
+
+      canvas.width = cropWidth;
+      canvas.height = cropHeight;
+
+      const context = canvas.getContext("2d");
+
+      context.drawImage(
+        image,
+        sourceX,
+        sourceY,
+        sourceWidth,
+        sourceHeight,
+        0,
+        0,
+        cropWidth,
+        cropHeight
+      );
+
+      const blob = await canvasToBlob(
+        canvas,
+        "image/jpeg",
+        0.92
+      );
+
+      showCanvas("cropPreview", canvas);
+      downloadBlob(blob, "cropped-image.jpg");
+
+      showMessage("Image cropped successfully.");
+    } catch (error) {
+      showMessage(error.message, true);
+    }
+  }
+
+  async function convertImage() {
+    try {
+      clearMessage();
+
+      const file = document.getElementById("convertFile").files[0];
+      const format = document.getElementById("convertFormat").value;
+      const quality = Number(
+        document.getElementById("convertQuality").value
+      );
+
+      const image = await loadImage(file);
+
+      const canvas = document.createElement("canvas");
+
+      canvas.width = image.width;
+      canvas.height = image.height;
+
+      const context = canvas.getContext("2d");
+
+      if (format === "image/jpeg") {
+        context.fillStyle = "#ffffff";
+        context.fillRect(
+          0,
+          0,
+          canvas.width,
+          canvas.height
+        );
+      }
+
+      context.drawImage(image, 0, 0);
+
+      const blob = await canvasToBlob(
+        canvas,
+        format,
+        quality
+      );
+
+      let extension = "jpg";
+
+      if (format === "image/png") {
+        extension = "png";
+      }
+
+      if (format === "image/webp") {
+        extension = "webp";
+      }
+
+      showCanvas("convertPreview", canvas);
+      downloadBlob(blob, converted-image.${extension});
+
+      showMessage(
+        Image converted successfully to ${extension.toUpperCase()}.
+      );
+    } catch (error) {
+      showMessage(error.message, true);
+    }
+  }
+
+  function initializeSignature() {
+    signatureCanvas = document.getElementById("signatureCanvas");
+    signatureContext = signatureCanvas.getContext("2d");
+
+    signatureContext.lineWidth = 4;
+    signatureContext.lineCap = "round";
+    signatureContext.lineJoin = "round";
+    signatureContext.strokeStyle = "#111111";
+
+    if (signatureCanvas.dataset.initialized === "true") {
+      return;
+    }
+
+    signatureCanvas.dataset.initialized = "true";
+
+function getPosition(event) {
+      const rect = signatureCanvas.getBoundingClientRect();
+
+      const clientX = event.touches
+        ? event.touches[0].clientX
+        : event.clientX;
+
+      const clientY = event.touches
+        ? event.touches[0].clientY
+        : event.clientY;
+
+      return {
+        x: (clientX - rect.left) *
+          (signatureCanvas.width / rect.width),
+
+        y: (clientY - rect.top) *
+          (signatureCanvas.height / rect.height)
+      };
+    }
+
+    function startDrawing(event) {
+      event.preventDefault();
+
+      signatureDrawing = true;
+
+      const position = getPosition(event);
+
+      signatureContext.beginPath();
+      signatureContext.moveTo(position.x, position.y);
+    }
+
+    function draw(event) {
+      if (!signatureDrawing) {
+        return;
+      }
+
+      event.preventDefault();
+
+      const position = getPosition(event);
+
+      signatureContext.lineTo(position.x, position.y);
+      signatureContext.stroke();
+    }
+
+    function stopDrawing() {
+      signatureDrawing = false;
+      signatureContext.closePath();
+    }
+
+    signatureCanvas.addEventListener(
+      "mousedown",
+      startDrawing
+    );
+
+    signatureCanvas.addEventListener(
+      "mousemove",
+      draw
+    );
+
+    signatureCanvas.addEventListener(
+      "mouseup",
+      stopDrawing
+    );
+
+    signatureCanvas.addEventListener(
+      "mouseleave",
+      stopDrawing
+    );
+
+    signatureCanvas.addEventListener(
+      "touchstart",
+      startDrawing,
+      { passive: false }
+    );
+
+    signatureCanvas.addEventListener(
+      "touchmove",
+      draw,
+      { passive: false }
+    );
+
+    signatureCanvas.addEventListener(
+      "touchend",
+      stopDrawing
+    );
+  }
+
+  function clearSignature() {
+    if (!signatureCanvas || !signatureContext) {
+      initializeSignature();
+    }
+
+    signatureContext.clearRect(
+      0,
+      0,
+      signatureCanvas.width,
+      signatureCanvas.height
+    );
+  }
+
+  function downloadSignature() {
+    if (!signatureCanvas) {
+      initializeSignature();
+    }
+
+    signatureCanvas.toBlob(blob => {
+      if (!blob) {
+        showMessage("Could not create signature.", true);
+        return;
+      }
+
+      downloadBlob(blob, "signature.png");
+      showMessage("Signature downloaded successfully.");
+    }, "image/png");
+  }
+
+  async function createCollage() {
+    try {
+      clearMessage();
+
+      const files = Array.from(
+        document.getElementById("collageFiles").files
+      );
+
+      const columns = Number(
+        document.getElementById("collageColumns").value
+      );
+
+      if (files.length === 0) {
+        throw new Error("Select at least one image.");
+      }
+
+      const images = await Promise.all(
+        files.map(loadImage)
+      );
+
+      const cellWidth = 500;
+      const cellHeight = 500;
+      const rows = Math.ceil(images.length / columns);
+      const gap = 10;
+
+      const canvas = document.createElement("canvas");
+
+      canvas.width =
+        columns * cellWidth +
+        (columns + 1) * gap;
+
+      canvas.height =
+        rows * cellHeight +
+        (rows + 1) * gap;
+
+      const context = canvas.getContext("2d");
+
+      context.fillStyle = "#ffffff";
+      context.fillRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+      );
+
+      images.forEach((image, index) => {
+        const column = index % columns;
+        const row = Math.floor(index / columns);
+
+        const x =
+          gap + column * (cellWidth + gap);
+
+        const y =
+          gap + row * (cellHeight + gap);
+
+        const imageRatio =
+          image.width / image.height;
+
+        const cellRatio =
+          cellWidth / cellHeight;
+
+        let sourceWidth;
+        let sourceHeight;
+        let sourceX;
+        let sourceY;
+
+        if (imageRatio > cellRatio) {
+          sourceHeight = image.height;
+
+sourceWidth = image.height * cellRatio;
+          sourceX = (image.width - sourceWidth) / 2;
+          sourceY = 0;
+        } else {
+          sourceWidth = image.width;
+          sourceHeight = image.width / cellRatio;
+          sourceX = 0;
+          sourceY = (image.height - sourceHeight) / 2;
+        }
+
+        context.drawImage(
+          image,
+          sourceX,
+          sourceY,
+          sourceWidth,
+          sourceHeight,
+          x,
+          y,
+          cellWidth,
+          cellHeight
+        );
+      });
+
+      const blob = await canvasToBlob(
+        canvas,
+        "image/jpeg",
+        0.92
+      );
+
+      showCanvas("collagePreview", canvas);
+      downloadBlob(blob, "image-collage.jpg");
+
+      showMessage("Collage created successfully.");
+    } catch (error) {
+      showMessage(error.message, true);
+    }
+  }
+
+  document.addEventListener("change", event => {
+    if (event.target.id === "resizeFile") {
+      const file = event.target.files[0];
+
+      if (!file) {
+        return;
+      }
+
+      loadImage(file)
+        .then(image => {
+          document.getElementById("resizeWidth").value =
+            image.width;
+
+          document.getElementById("resizeHeight").value =
+            image.height;
+        })
+        .catch(error => showMessage(error.message, true));
+    }
+  });
+
+  document.addEventListener("DOMContentLoaded", () => {
+    initializeSignature();
+  });
+</script>
+
+</body>
+</html>
